@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tip for Driver</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .center {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+       
+        .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        }
+
+.card {
+  border: none;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.form-group label {
+  font-weight: 600;
+}
+
+textarea {
+  resize: none;
+}
+
+.btn-primary {
+  background-color: #3f51b5;
+  border-color: #3f51b5;
+}
+
+.btn-primary:hover {
+  background-color: #32408f;
+  border-color: #32408f;
+}
+    </style>
+
+</head>
+<body>
+    <section class="tipAmount" >
+        <div class="container">
+          <div class="row">      
+            <div class="col-md-8">
+              <div class="card" margin-left="50px">
+                <div class="card-body" > 
+                  <h2 class="card-title text-center mb-4" a>Tip for Driver</h2>
+                  <form>
+                    <div class="form-group" align="center">
+                        <label for="tip">Would you like to leave a tip for the driver?</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tip" id="yes" value="yes">
+                            <label class="form-check-label" for="yes">Yes</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tip" id="no" value="no">
+                            <label class="form-check-label" for="no">No</label>
+                        </div>
+                    </div>
+                    <div class="form-group" id="tipAmount" style="display:none;">
+                        <label for="amount">How much would you like to tip?</label>
+                        <input class="form-control" type="number" name="amount" id="amount">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <!-- jQuery -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <!-- Bootstrap JS -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $("input[name='tip']").change(function() {
+                        if ($("#yes").is(":checked")) {
+                            $("#tipAmount").show();
+                        } else {
+                            $("#tipAmount").hide();
+                        }
+                    });
+                    $("form").submit(function(e) {
+                        e.preventDefault();
+                        if ($("#yes").is(":checked")) {
+                            var tipAmount = $("#amount").val();
+                            if (tipAmount !== "") {
+                                 localStorage.setItem("tip", tipAmount);
+                                  window.location.href = "bill1.html";
+                                $("#tipAmount").html("<h2 class='text-center'>Thank you for leaving a tip of Rs " + tipAmount + "!</h2>");
+                            } else {
+                                alert("Please enter a valid tip amount.");
+                            }
+                        } else {
+                            $("#tipAmount").html("<h2 class='text-center'>No tip was left.</h2>");
+                            $("#tipAmount").show();
+                        }
+                    });
+                });
+
+            </script>
+</body>
+</html>
+
+
